@@ -33,7 +33,7 @@ def predict():
 
     label_data = pd.read_csv("labels_all.csv", delimiter=",")
     imgData = request.get_data()
-    # encode it into a suitable format
+    # encoding
     convertImage(imgData)
 
     x_test = imread('saved_image/test_image.png', mode='L')

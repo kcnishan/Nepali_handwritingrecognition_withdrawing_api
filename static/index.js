@@ -10,7 +10,7 @@
 	context.fillStyle="black";
 	context.fillRect(0,0,canvas.width,canvas.height);
 	context.color = "white";
-	context.lineWidth = 10;
+	context.lineWidth = 12;
     context.lineJoin = context.lineCap = 'round';
 
 	debug();
@@ -74,7 +74,7 @@
 
 		slider.oninput = function() {
 		  output.innerHTML = this.value;
-		  context.lineWidth =10;
+		  context.lineWidth =12;
 		}
 
 		$( "#lineWidth" ).change(function()

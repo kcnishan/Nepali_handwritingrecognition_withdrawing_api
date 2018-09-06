@@ -19,7 +19,7 @@ graph = tf.get_default_graph()
 # decoding an image from base64 into raw representation
 def convertImage(imgData1):
     imgstr = re.search(r'base64,(.*)', str(imgData1)).group(1)
-    with open('test_image.png', 'wb') as output:
+    with open('saved_image/test_image.png', 'wb') as output:
         output.write(base64.b64decode(imgstr))
 
 
@@ -36,7 +36,7 @@ def predict():
     # encode it into a suitable format
     convertImage(imgData)
 
-    x_test = imread('test_image.png', mode='L')
+    x_test = imread('saved_image/test_image.png', mode='L')
     x_test = imresize(x_test, (32, 32))
     datas=[]
     datas.append(x_test.flatten())

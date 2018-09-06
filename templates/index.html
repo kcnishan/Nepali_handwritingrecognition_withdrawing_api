@@ -22,21 +22,8 @@
           <h1 class="text-muted">नेपाली हस्तलेखन वर्गीकरण</h1>
       </div>
 
-      <div class="jumbotron">
-        <h4 class="jumbotronHeading">Please draw a image in middle of the box below!</h4>
-
-		<div class="slidecontainer">
-
-		  <p>Drag the slider to change the line width.</p>
-		  <input type="range" min="5" max="50" value="10" id="myRange">
-            <p>Value: <span id="sliderValue"></span></p>
-
-            
-
-
-
-		</div>
-		<div class="canvasDiv">
+      <div class="jumbotron " style="display:flex; align-items:center;">
+          <div class="canvasDiv">
 	        <canvas id="canvas" width="320" height="320"></canvas>
 	        <br>
 	        <p style="text-align:center;">
@@ -44,12 +31,23 @@
 		        <a class="btn btn-primary" href="#" id="clearButton" role="button">Clear</a>
 	    	</p>
         </div>
+        <!--<h4 class="jumbotronHeading">Please draw a image in middle of the box below!</h4>-->
+          <div>
+
+          <p id="result" style="padding:50px;">Most probable output????</p>
+		<div class="slidecontainer" style="visibility:hidden;">
+
+		  <input type="range" value="10" id="myRange">
+            <span id="sliderValue"></span>
+
+
+
+		</div>
+          </div>
+
       </div>
 
-      <div class="jumbotron">
-      	<p id="result">Most probable output????</p>
 
-      </div>
 
 
 
@@ -71,7 +69,8 @@
 				url: $SCRIPT_ROOT + "/predict/",
 				data: img,
 				success: function(data){
-					$('#result').text(' Most probable output: '+data);
+				    jsonData =  jQuery.parseJSON( data )
+					$('#result').html(' Prediction: '+(jsonData.label) + ' <br> Probability: '+ jsonData.probability);
 
 				}
 			});

@@ -10,7 +10,7 @@
 	context.fillStyle="black";
 	context.fillRect(0,0,canvas.width,canvas.height);
 	context.color = "white";
-	context.lineWidth = 15;
+	context.lineWidth = 10;
     context.lineJoin = context.lineCap = 'round';
 
 	debug();
@@ -55,13 +55,14 @@
 	{
 		/* CLEAR BUTTON */
 		var clearButton = $( "#clearButton" );
-
+        var outputWindow = $("#result")
 		clearButton.on( "click", function()
 		{
 
 				context.clearRect( 0, 0, 320, 320 );
 				context.fillStyle="black";
 				context.fillRect(0,0,canvas.width,canvas.height);
+				outputWindow.html("Write on  box!!!!")
 
 		});
 
@@ -73,7 +74,7 @@
 
 		slider.oninput = function() {
 		  output.innerHTML = this.value;
-		  context.lineWidth = $( this ).val();
+		  context.lineWidth =10;
 		}
 
 		$( "#lineWidth" ).change(function()

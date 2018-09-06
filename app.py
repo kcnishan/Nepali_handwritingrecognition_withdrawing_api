@@ -7,7 +7,7 @@ import tensorflow as tf
 import pandas as pd
 import base64
 from scipy.misc import imread, imresize
-
+import json
 
 app = Flask(__name__)
 
@@ -38,19 +38,23 @@ def predict():
 
     x_test = imread('test_image.png', mode='L')
     x_test = imresize(x_test, (32, 32))
-    x_test = x_test.reshape(-1, 32, 32, 1)
+    datas=[]
+    datas.append(x_test.flatten())
+    x_test = np.array(datas).reshape(-1, 32, 32, 1)
+    x_test=x_test/255
+
 
 
     with graph.as_default():
         prediction = model.predict_classes(x_test)
-        #probability = model.predict_proba(x_test)
+        probability = model.predict_proba(x_test)
 
     # squeeze value from 1D array
     label = int(np.squeeze(prediction))
-    #max_probability = np.amax(probability)
     label=label_data.iloc[label, :].values[0]
-    #probability=max_probability * 100
-    return label
+    max_probability = np.amax(probability)
+
+    return json.dumps({'label':label,'probability':float(max_probability)},ensure_ascii=False)
 
 
 
